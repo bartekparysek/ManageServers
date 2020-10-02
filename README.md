@@ -20,18 +20,19 @@ Password: acaisoft248
 
 ### Tasks
  1. List all the servers.
- 2. Add a dropdown on the right with 2 options:
-    1. Turn on (or Turn off) - depending on the status
-    2. Reboot
- 3. When the server is in a `REBOOTING` status you should be pinging the
-    API (e.g. every 1s) until the status changes.
- 4. Allow user to locally search for server.
+ 2. Provide 1:1 UI from the invision project (Pay attention to this)
+ 2. Add a clickable dropdown on the right with 2 options :
+    1. Turn on (or Turn off) - depending on the status (You can't display Turn on with Turn Off dropdown option at the same time)
+    2. Reboot (When server is rebooting please pay attention to how the dropdown looks like)
+ 3. When the server is in a `REBOOTING` status you should be pinging single server API endpoint `/servers/:serverId `  (e.g. every 1s) until the status changes.
+ 4. Allow the user to locally search for a server ( Pay attention to how your application behaves when you put something in search input)
+ 5. Add unit tests at least for rebooting functionality and if you want and you have time please add more tests.
 
 ### Tips
- - We like small components.
+ - We really like small components.
  - Pay attention to code quality, conventions, formatting, etc.
- - Tests are very welcomed.
- - You can use any libraries.
+ - You can use any libraries, but when you’re using something like ngrx or any other more advanced library please give us a quick note why do you use it.
+ - Don't leave unneccesary code!!!
 
 ### Requirements
 
