@@ -4,8 +4,6 @@ import axios from 'axios';
 import List from './List';
 
 const ListWrapper = styled.div`
-/* display: flex;
-flex-direction: column; */
 background-color: #ffff;
 border: 2px solid #EDEDF0;
 `;

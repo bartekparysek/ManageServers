@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { MdMoreHoriz as More, MdClose as Failed, MdBrightness1 as Live } from 'react-icons/md'
 
 const StyledList = styled.ul`
+   margin:0;
    list-style-type: none;
    padding:0;
 `
@@ -10,7 +11,7 @@ const ListItem = styled.li`
    display: flex;
    align-items: center;
    border-bottom: 2px solid #EDEDF0;
-   padding: 0 3rem;
+   padding: 0 36px 0 42px;
    justify-content: space-between;
    svg{
       color:#A9AEC1;
@@ -21,22 +22,30 @@ const ListItem = styled.li`
 const InfoWrapper = styled.div`
    display:flex;
    align-items: center;
-
-
 `
 const Name = styled.div`
-
+   min-width: 17vw;
+   font-size:13px;
+   font-weight: 600;
+   letter-spacing: 0;
+   line-height: 59px;
    h5{
-      padding-right:5rem;
+      padding-left: 1.5rem;
+      margin:0;
    }
 `;
 
 const Status = styled.div`
    display: flex;
    align-items: center;
+   font-size: 12px;
+   font-weight: 600;
+   letter-spacing: 0;
+   line-height: 59px;
+   padding-left: 0.5rem;
    svg{
-      width: 0.75em;
-      height: 0.95em;
+      width: 1em;
+      height: 1em;
       margin-right: 0.5rem;
    }
 `;
