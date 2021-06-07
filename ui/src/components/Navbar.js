@@ -7,12 +7,17 @@ top:0;
 background-color: #494E61;
 height: 73px;
 color: #fff;
-padding: 20px;
+padding: 1rem 0;
 font-family: 'Montserrat', sans-serif;
-font-size: 14px;
 line-height: 44px;
 font-weight: bold;
 
+p{
+   border-right: 2px solid #757B8F;
+   width: max-content;
+   padding: 0 3rem;
+   font-size: 14px;
+}
 
 `;
 

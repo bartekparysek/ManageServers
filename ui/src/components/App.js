@@ -12,7 +12,7 @@ const StyledContainer = styled.div`
    color: #494E61;
    font-family: 'Open Sans',sans-serif;
    margin: 0 auto;
-   width: 70vw;
+   width: 60vw;
 
    /* p{
       font-size: 21px;

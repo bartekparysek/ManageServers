@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { MdMoreHoriz as More, MdClose as Failed, MdBrightness1 as Live } from 'react-icons/md'
@@ -16,7 +16,7 @@ const ListHead = styled.div`
    border-bottom:2px solid #EDEDF0 ;
 
    p{
-      padding: 0 2rem;
+      padding: 0 3rem;
       color: #9CA7D3;
       font-size: 14px;
       text-align: center;
@@ -24,7 +24,9 @@ const ListHead = styled.div`
       line-height: 44px;
       text-transform: uppercase;
    }
-
+   p ~ p {
+      padding-left: 15rem;
+   }
 `
 const List = styled.ul`
    list-style-type: none;
@@ -48,12 +50,20 @@ const InfoWrapper = styled.div`
 
 
 `
+const Name = styled.div`
+
+   h5{
+      padding-right:5rem;
+   }
+`;
+
 const Status = styled.div`
    display: flex;
    align-items: center;
    svg{
       width: 0.75em;
       height: 0.95em;
+      margin-right: 0.5rem;
    }
 `;
 
@@ -86,13 +96,15 @@ const ServersList = () => {
             {servers && servers.map(server => (
                <ListItem key={server.id}>
                   <InfoWrapper>
-                     <h5>{server.name}</h5>
+                     <Name>
+                        <h5>{server.name}</h5>
+                     </Name>
                      <Status>
                         {renderIcon(server.status)}
                         <p>{server.status}</p>
                      </Status>
-
                   </InfoWrapper>
+
                   <More />
                </ListItem>
             ))}
