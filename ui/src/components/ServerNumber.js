@@ -3,8 +3,8 @@ import React from 'react'
 const ServerNumber = () => {
    return (
       <div>
-         <h3>Servers</h3>
-         <p>Number or eleements:</p>
+         <h4>Servers</h4>
+         <p>Number of elements:</p>
       </div>
    )
 }
