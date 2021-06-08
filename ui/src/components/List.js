@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { MdMoreHoriz as More, MdClose as Failed, MdBrightness1 as Live } from 'react-icons/md'
+import DropDown from './DropDown';
 
 const StyledList = styled.ul`
    margin:0;
@@ -67,7 +68,12 @@ const renderIcon = (status) => {
    return null
 }
 
+
 const List = ({ servers }) => {
+   const [dropdown, setDropDown] = useState(false);
+   const [clickedItemId, setClickedItemId] = useState(false);
+
+
    return (
       <StyledList>
          {servers && servers.map(server => (
@@ -81,9 +87,13 @@ const List = ({ servers }) => {
                      <p>{server.status}</p>
                   </Status>
                </InfoWrapper>
-               <StyledMore />
+               <StyledMore onClick={() => setClickedItemId(!clickedItemId), console.log(clickedItemId)} />
+               <DropDown className={clickedItemId} />
             </ListItem>
+
+
          ))}
+
       </StyledList>
    )
 }
