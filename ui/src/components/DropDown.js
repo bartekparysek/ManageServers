@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const StyledDropDown = styled.div`
    position: absolute;
    background-color: #fff;
-   transform: translateX(calc(50vw - 2rem)) translateY(4vh);
+   transform: translateX(calc(50vw - 2rem)) translateY(2vh);
    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
    p{
