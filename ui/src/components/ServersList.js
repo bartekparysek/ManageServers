@@ -40,6 +40,8 @@ const IntroWrapper = styled.div`
 `;
 const ServersList = () => {
    const [servers, setServers] = useState(null);
+   const [searchResults, setSearchResults] = useState([]);
+   const [searchTerm, setSearchTerm] = useState('');
    useEffect(() => {
       const getresponse = async () => {
          const response = await axios.get('http://localhost:4454/servers');
@@ -52,14 +54,19 @@ const ServersList = () => {
       <>
          <IntroWrapper>
             <ServerNumber servers={servers} />
-            <SearchBar servers={servers} />
+            <SearchBar
+               servers={servers}
+               onSearchResultsChange={setSearchResults}
+               searchTerm={searchTerm}
+               onSearchTermChange={setSearchTerm}
+            />
          </IntroWrapper>
          <ListWrapper>
             <ListHead>
                <p>Name</p>
                <p>Status</p>
             </ListHead>
-            <List servers={servers} />
+            <List servers={searchResults} />
          </ListWrapper>
       </>
    );
