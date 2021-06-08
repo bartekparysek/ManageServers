@@ -18,7 +18,10 @@ const IntroWrapper = styled.div`
    display: flex;
    justify-content: space-between;
    align-items: center;
-   padding: 1rem 0 ;
+   padding: 3rem 0 0.5rem 0 ;
+   h4{
+      margin:0;
+   }
 `;
 
 const App = () => {
