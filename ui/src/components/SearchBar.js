@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FiSearch } from 'react-icons/fi'
 
@@ -26,11 +26,22 @@ const Search = styled(FiSearch)`
    font-weight: bold;
 `;
 
-const SearchBar = () => {
+const SearchBar = ({ servers }) => {
    const [searchTerm, setSearchTerm] = useState('');
+   const [searchResults, setSearchResults] = useState([]);
+
    const handleChange = event => {
       setSearchTerm(event.target.value);
    };
+   useEffect(() => {
+      if (servers) {
+         const results = servers.filter(server => {
+            return server.name.toLowerCase().includes(searchTerm.toLowerCase());
+         });
+         setSearchResults(results);
+      }
+
+   }, [searchTerm]);
 
    return (
       <div>
