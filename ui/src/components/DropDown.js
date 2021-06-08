@@ -2,17 +2,17 @@ import React from 'react'
 import styled from 'styled-components';
 
 const StyledDropDown = styled.div`
-   visibility: hidden;
    position: absolute;
    background-color: #fff;
-   z-index: 99;
+   transform: translateX(calc(50vw - 2rem)) translateY(4vh);
    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-   ${props => props.isActive && `
-      visibility: visible;
-   `}
+
    p{
-      text-align: center;
-      padding: 0.5rem 1rem;
+      padding: 0.25rem 4rem;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 50px;
+      letter-spacing: 0;
    }
 
    p:hover{
@@ -21,9 +21,9 @@ const StyledDropDown = styled.div`
 
 `
 
-const DropDown = ({ isActive }) => {
+const DropDown = ({ status }) => {
    return (
-      <StyledDropDown isActive={isActive} >
+      <StyledDropDown >
          <p>Turn On</p>
          <p>Reload</p>
       </StyledDropDown>

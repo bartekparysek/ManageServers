@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { MdMoreHoriz as More, MdClose as Failed, MdBrightness1 as Live } from 'react-icons/md'
 import DropDown from './DropDown';
@@ -70,9 +70,13 @@ const renderIcon = (status) => {
 
 
 const List = ({ servers }) => {
-   const [dropdown, setDropDown] = useState(false);
-   const [clickedItemId, setClickedItemId] = useState(false);
+   const [open, setOpen] = useState(false);
+   const [itemId, setItemId] = useState(null);
 
+   const renderDropDown = (id) => {
+      setItemId(id);
+      setOpen(!open);
+   }
 
    return (
       <StyledList>
@@ -87,10 +91,9 @@ const List = ({ servers }) => {
                      <p>{server.status}</p>
                   </Status>
                </InfoWrapper>
-               <StyledMore onClick={() => setClickedItemId(!clickedItemId), console.log(clickedItemId)} />
-               <DropDown className={clickedItemId} />
+               <StyledMore onClick={() => renderDropDown(server.id)} />
+               {open && itemId === server.id && <DropDown status={server.status} />}
             </ListItem>
-
 
          ))}
 
