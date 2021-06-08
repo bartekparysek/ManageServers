@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
+import axios from 'axios';
 
 const StyledDropDown = styled.div`
    position: absolute;
@@ -18,13 +19,23 @@ const StyledDropDown = styled.div`
    p:hover{
       background-color:#F2F3F6;
    }
-
 `
 
-const DropDown = ({ status }) => {
+
+const DropDown = ({ id }) => {
+   const [server, setServer] = useState(null);
+   useEffect(() => {
+      const getresponse = async () => {
+         const response = await axios.get(`http://localhost:4454/servers/${id}`)
+         setServer(response.data);
+         console.log(response.data);
+      }
+      getresponse();
+   }, [id]);
+
    return (
       <StyledDropDown >
-         <p>Turn On</p>
+         <p>{server && server.status}</p>
          <p>Reload</p>
       </StyledDropDown>
    )

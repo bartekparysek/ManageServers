@@ -13,12 +13,6 @@ const StyledContainer = styled.div`
    font-family: 'Open Sans',sans-serif;
    margin: 0 auto;
    width: 60vw;
-
-   /* p{
-      font-size: 21px;
-      font-weight: 600;
-   } */
-
 `
 const IntroWrapper = styled.div`
    display: flex;

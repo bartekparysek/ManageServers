@@ -92,7 +92,7 @@ const List = ({ servers }) => {
                   </Status>
                </InfoWrapper>
                <StyledMore onClick={() => renderDropDown(server.id)} />
-               {open && itemId === server.id && <DropDown status={server.status} />}
+               {open && itemId === server.id && <DropDown id={server.id} />}
             </ListItem>
 
          ))}
