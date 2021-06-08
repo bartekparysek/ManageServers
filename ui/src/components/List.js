@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { MdMoreHoriz as More, MdClose as Failed, MdBrightness1 as Live } from 'react-icons/md'
 import DropDown from './DropDown';
@@ -72,7 +72,6 @@ const renderIcon = (status) => {
 const List = ({ servers }) => {
    const [open, setOpen] = useState(false);
    const [itemId, setItemId] = useState(null);
-   const [serverStatus, setServerStatus] = useState([]);
 
    const renderDropDown = (id) => {
       setItemId(id);
