@@ -1,10 +1,10 @@
 import React from 'react'
 
-const ServerNumber = () => {
+const ServerNumber = ({ servers }) => {
    return (
       <div>
          <h4>Servers</h4>
-         <p>Number of elements:</p>
+         <p>Number of elements: {servers && servers.length}</p>
       </div>
    )
 }

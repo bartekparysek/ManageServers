@@ -77,8 +77,8 @@ const List = ({ servers }) => {
       setItemId(id);
       setOpen(!open);
    }
-
    return (
+
       <StyledList>
          {servers && servers.map(server => (
             <ListItem key={server.id}>

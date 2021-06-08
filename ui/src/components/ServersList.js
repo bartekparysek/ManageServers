@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+
 import List from './List';
+import SearchBar from './SearchBar';
+import ServerNumber from './ServerNumber';
 
 const ListWrapper = styled.div`
 background-color: #ffff;
@@ -26,9 +29,17 @@ const ListHead = styled.div`
       padding-left: 15rem;
    }
 `
+const IntroWrapper = styled.div`
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 3rem 0 0.5rem 0 ;
+   h4{
+      margin:0;
+   }
+`;
 const ServersList = () => {
    const [servers, setServers] = useState(null);
-
    useEffect(() => {
       const getresponse = async () => {
          const response = await axios.get('http://localhost:4454/servers');
@@ -38,13 +49,19 @@ const ServersList = () => {
    }, []);
 
    return (
-      <ListWrapper>
-         <ListHead>
-            <p>Name</p>
-            <p>Status</p>
-         </ListHead>
-         <List servers={servers} />
-      </ListWrapper>
+      <>
+         <IntroWrapper>
+            <ServerNumber servers={servers} />
+            <SearchBar servers={servers} />
+         </IntroWrapper>
+         <ListWrapper>
+            <ListHead>
+               <p>Name</p>
+               <p>Status</p>
+            </ListHead>
+            <List servers={servers} />
+         </ListWrapper>
+      </>
    );
 }
 
