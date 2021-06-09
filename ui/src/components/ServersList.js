@@ -66,7 +66,7 @@ const ServersList = () => {
                <p>Name</p>
                <p>Status</p>
             </ListHead>
-            <List servers={searchResults} />
+            <List servers={searchResults} onSearchResultsChange={setSearchResults} />
          </ListWrapper>
       </>
    );

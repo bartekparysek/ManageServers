@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components';
 import axios from 'axios';
+import { StatusContext } from './List';
 
 const StyledButton = styled.button`
    padding: 0.25rem 4rem 0.25rem 2rem;
@@ -23,26 +24,41 @@ flex-direction:column;
 `
 
 const Button = ({ status, id, onServerChange }) => {
+   const listServerStatus = useContext(StatusContext);
+
+
    const turnOffServer = () => {
       axios.put(`http://localhost:4454/servers/${id}/off`)
-         .then(response => onServerChange(prevState => ({
-            ...prevState,
-            status: response.data.status
-         })));
+         .then(response => {
+            onServerChange(prevState => ({
+               ...prevState,
+               status: response.data.status
+            }),
+               listServerStatus.setStatus(response.data.status)
+            )
+         });
    }
    const turnOnServer = () => {
       axios.put(`http://localhost:4454/servers/${id}/on`)
-         .then(response => onServerChange(prevState => ({
-            ...prevState,
-            status: response.data.status,
-         })));
+         .then(response => {
+            onServerChange(prevState => ({
+               ...prevState,
+               status: response.data.status,
+            }),
+               listServerStatus.setStatus(response.data.status)
+            )
+         });
    }
    const rebootServer = () => {
       axios.put(`http://localhost:4454/servers/${id}/reboot`)
-         .then(response => onServerChange(prevState => ({
-            ...prevState,
-            status: response.data.status,
-         })));
+         .then(response => {
+            onServerChange(prevState => ({
+               ...prevState,
+               status: response.data.status,
+            }),
+               listServerStatus.setStatus(response.data.status)
+            )
+         });
    }
 
    const renderButton = (status) => {

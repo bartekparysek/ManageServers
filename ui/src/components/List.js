@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, createContext } from 'react';
 import styled from 'styled-components';
 import { MdMoreHoriz as More, MdClose as Failed, MdBrightness1 as Live } from 'react-icons/md'
 import DropDown from './DropDown';
 
+export const StatusContext = createContext();
 const StyledList = styled.ul`
    margin:0;
    list-style-type: none;
@@ -69,9 +70,18 @@ const renderIcon = (status) => {
 }
 
 
-const List = ({ servers }) => {
+const List = ({ servers, onSearchResultsChange }) => {
    const [open, setOpen] = useState(false);
    const [itemId, setItemId] = useState(null);
+   const [status, setStatus] = useState(null);
+
+   // results.onSearchResultsChange(prevState => {
+   //    let stateCopy = [...prevState];
+   //    let serv = prevState.findIndex(result => result.id === id);
+   //    let item = { ...stateCopy[serv] };
+   //    item.status = response.data.status;
+   //    stateCopy[serv] = item;
+   // })
 
    const renderDropDown = (id) => {
       setItemId(id);
@@ -92,7 +102,10 @@ const List = ({ servers }) => {
                   </Status>
                </InfoWrapper>
                <StyledMore onClick={() => renderDropDown(server.id)} />
-               {open && itemId === server.id && <DropDown id={server.id} />}
+               <StatusContext.Provider value={{ setStatus }}>
+                  {open && itemId === server.id && <DropDown id={server.id} />}
+               </StatusContext.Provider>
+
             </ListItem>
 
          ))}
