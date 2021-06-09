@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { MdMoreHoriz as More, MdClose as Failed, MdBrightness1 as Live } from 'react-icons/md'
 import DropDown from './DropDown';
@@ -78,7 +78,6 @@ const List = ({ servers, onStatusChange, itemId, onItemIdChange }) => {
       setOpen(!open);
    }
    return (
-
       <StyledList>
          {servers && servers.map(server => (
             <ListItem key={server.id}>
