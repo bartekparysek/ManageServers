@@ -86,6 +86,7 @@ const ServersList = () => {
                onStatusChange={setStatus}
                itemId={itemId}
                onItemIdChange={setItemId}
+               onSearchResultsChange={setSearchResults}
             />
          </ListWrapper>
       </>

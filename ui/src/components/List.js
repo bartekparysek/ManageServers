@@ -1,7 +1,9 @@
 import React, { useState, createContext, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import { MdMoreHoriz as More, MdClose as Failed, MdBrightness1 as Live } from 'react-icons/md'
 import DropDown from './DropDown';
+import { useInterval } from './UseInterval';
 
 export const StatusContext = createContext();
 const StyledList = styled.ul`
@@ -70,13 +72,36 @@ const renderIcon = (status) => {
 }
 
 
-const List = ({ servers, onStatusChange, itemId, onItemIdChange }) => {
+export const List = ({ servers, onStatusChange, itemId, onItemIdChange, onSearchResultsChange }) => {
    const [open, setOpen] = useState(false);
 
    const renderDropDown = (id) => {
       onItemIdChange(id);
       setOpen(!open);
    }
+
+   useInterval(() => {
+      const rebooting = servers.filter(server => server.status === "REBOOTING")
+      if (servers && rebooting.length > 0) {
+         rebooting.forEach(item => {
+            const getresponse = async () => {
+               const response = await axios.get(`http://localhost:4454/servers/${item.id}`);
+
+               if (response.data.status === "ONLINE") {
+                  let resultsCopy = [...servers];
+                  let server = { ...resultsCopy[item.id - 1] };
+                  server.status = response.data.status;
+                  resultsCopy[item.id - 1] = server;
+                  onSearchResultsChange(resultsCopy);
+               }
+            }
+            getresponse();
+
+         });
+      }
+   }, 1000);
+
+
    return (
       <StyledList>
          {servers && servers.map(server => (

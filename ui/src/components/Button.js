@@ -73,7 +73,7 @@ const Button = ({ status, id, onServerChange }) => {
             </>
          );
       } else {
-         return <StyledButton onMouseLeave={listServerStatus.onStatusChange(null)} disabled> Rebooting...</StyledButton>
+         return null;
       }
    }
    return (
