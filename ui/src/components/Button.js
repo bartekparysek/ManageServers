@@ -33,9 +33,8 @@ const Button = ({ status, id, onServerChange }) => {
             onServerChange(prevState => ({
                ...prevState,
                status: response.data.status
-            }),
-               listServerStatus.setStatus(response.data.status)
-            )
+            }))
+            listServerStatus.onStatusChange(response.data.status)
          });
    }
    const turnOnServer = () => {
@@ -44,9 +43,8 @@ const Button = ({ status, id, onServerChange }) => {
             onServerChange(prevState => ({
                ...prevState,
                status: response.data.status,
-            }),
-               listServerStatus.setStatus(response.data.status)
-            )
+            }))
+            listServerStatus.onStatusChange(response.data.status)
          });
    }
    const rebootServer = () => {
@@ -55,9 +53,8 @@ const Button = ({ status, id, onServerChange }) => {
             onServerChange(prevState => ({
                ...prevState,
                status: response.data.status,
-            }),
-               listServerStatus.setStatus(response.data.status)
-            )
+            }))
+            listServerStatus.onStatusChange(response.data.status)
          });
    }
 

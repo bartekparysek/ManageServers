@@ -42,6 +42,8 @@ const ServersList = () => {
    const [servers, setServers] = useState(null);
    const [searchResults, setSearchResults] = useState([]);
    const [searchTerm, setSearchTerm] = useState('');
+   const [status, setStatus] = useState(null);
+   const [itemId, setItemId] = useState(null);
    useEffect(() => {
       const getresponse = async () => {
          const response = await axios.get('http://localhost:4454/servers');
@@ -49,6 +51,16 @@ const ServersList = () => {
       }
       getresponse();
    }, []);
+
+   useEffect(() => {
+      if (status) {
+         let resultsCopy = [...searchResults];
+         let server = { ...resultsCopy[itemId - 1] };
+         server.status = status;
+         resultsCopy[itemId - 1] = server;
+         setSearchResults(resultsCopy)
+      }
+   }, [status, itemId]);
 
    return (
       <>
@@ -66,7 +78,12 @@ const ServersList = () => {
                <p>Name</p>
                <p>Status</p>
             </ListHead>
-            <List servers={searchResults} onSearchResultsChange={setSearchResults} />
+            <List
+               servers={searchResults}
+               onStatusChange={setStatus}
+               itemId={itemId}
+               onItemIdChange={setItemId}
+            />
          </ListWrapper>
       </>
    );

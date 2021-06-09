@@ -70,21 +70,11 @@ const renderIcon = (status) => {
 }
 
 
-const List = ({ servers, onSearchResultsChange }) => {
+const List = ({ servers, onStatusChange, itemId, onItemIdChange }) => {
    const [open, setOpen] = useState(false);
-   const [itemId, setItemId] = useState(null);
-   const [status, setStatus] = useState(null);
-
-   // results.onSearchResultsChange(prevState => {
-   //    let stateCopy = [...prevState];
-   //    let serv = prevState.findIndex(result => result.id === id);
-   //    let item = { ...stateCopy[serv] };
-   //    item.status = response.data.status;
-   //    stateCopy[serv] = item;
-   // })
 
    const renderDropDown = (id) => {
-      setItemId(id);
+      onItemIdChange(id);
       setOpen(!open);
    }
    return (
@@ -102,7 +92,7 @@ const List = ({ servers, onSearchResultsChange }) => {
                   </Status>
                </InfoWrapper>
                <StyledMore onClick={() => renderDropDown(server.id)} />
-               <StatusContext.Provider value={{ setStatus }}>
+               <StatusContext.Provider value={{ onStatusChange }}>
                   {open && itemId === server.id && <DropDown id={server.id} />}
                </StatusContext.Provider>
 
