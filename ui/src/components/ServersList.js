@@ -59,8 +59,11 @@ const ServersList = () => {
          server.status = status;
          resultsCopy[itemId - 1] = server;
          setSearchResults(resultsCopy)
+
       }
-   }, [status, itemId]);
+
+   }, [status]);
+
 
    return (
       <>

@@ -62,18 +62,18 @@ const Button = ({ status, id, onServerChange }) => {
       if (status === 'ONLINE') {
          return (
             <>
-               <StyledButton onClick={turnOffServer}>Turn off</StyledButton>
-               <StyledButton onClick={rebootServer}>Reebot</StyledButton>
+               <StyledButton onMouseLeave={listServerStatus.onStatusChange(null)} onClick={turnOffServer}>Turn off</StyledButton>
+               <StyledButton onMouseLeave={listServerStatus.onStatusChange(null)} onClick={rebootServer}>Reebot</StyledButton>
             </>
          );
       } if (status === 'OFFLINE') {
          return (
             <>
-               <StyledButton onClick={turnOnServer}>Turn on</StyledButton>
+               <StyledButton onMouseLeave={listServerStatus.onStatusChange(null)} onClick={turnOnServer}>Turn on</StyledButton>
             </>
          );
       } else {
-         return <StyledButton disabled> Rebooting...</StyledButton>
+         return <StyledButton onMouseLeave={listServerStatus.onStatusChange(null)} disabled> Rebooting...</StyledButton>
       }
    }
    return (
