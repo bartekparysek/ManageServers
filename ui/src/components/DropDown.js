@@ -22,7 +22,11 @@ const DropDown = ({ id }) => {
 
    return (
       <StyledDropDown >
-         {server && <Button status={server.status} id={id} />}
+         {server && <Button
+            status={server.status}
+            id={id}
+            onServerChange={setServer}
+         />}
       </StyledDropDown>
    )
 }

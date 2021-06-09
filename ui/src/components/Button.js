@@ -22,18 +22,27 @@ display: flex;
 flex-direction:column;
 `
 
-const Button = ({ status, id }) => {
+const Button = ({ status, id, onServerChange }) => {
    const turnOffServer = () => {
       axios.put(`http://localhost:4454/servers/${id}/off`)
-         .then(response => console.log(response));
+         .then(response => onServerChange(prevState => ({
+            ...prevState,
+            status: response.data.status
+         })));
    }
    const turnOnServer = () => {
       axios.put(`http://localhost:4454/servers/${id}/on`)
-         .then(response => console.log(response));
+         .then(response => onServerChange(prevState => ({
+            ...prevState,
+            status: response.data.status,
+         })));
    }
    const rebootServer = () => {
       axios.put(`http://localhost:4454/servers/${id}/reboot`)
-         .then(response => console.log(response));
+         .then(response => onServerChange(prevState => ({
+            ...prevState,
+            status: response.data.status,
+         })));
    }
 
    const renderButton = (status) => {
@@ -51,7 +60,7 @@ const Button = ({ status, id }) => {
             </>
          );
       } else {
-         return <p>Reebooting...</p>
+         return <StyledButton disabled> Rebooting...</StyledButton>
       }
    }
    return (
