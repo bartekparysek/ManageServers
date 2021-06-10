@@ -25,35 +25,34 @@ flex-direction:column;
 
 const Button = ({ status, id, onServerChange }) => {
    const listServerStatus = useContext(StatusContext);
+   let servers = listServerStatus.servers;
 
+   const changeStatus = (status) => {
+      let resultsCopy = [...servers];
+      let server = { ...resultsCopy[id - 1] };
+      server.status = status;
+      resultsCopy[id - 1] = server;
+      onServerChange(resultsCopy);
+   }
 
    const turnOffServer = () => {
       axios.put(`http://localhost:4454/servers/${id}/off`)
          .then(response => {
-            onServerChange(prevState => ({
-               ...prevState,
-               status: response.data.status
-            }))
+            changeStatus(response.data.status)
             listServerStatus.onStatusChange(response.data.status)
          });
    }
    const turnOnServer = () => {
       axios.put(`http://localhost:4454/servers/${id}/on`)
          .then(response => {
-            onServerChange(prevState => ({
-               ...prevState,
-               status: response.data.status,
-            }))
+            changeStatus(response.data.status)
             listServerStatus.onStatusChange(response.data.status)
          });
    }
    const rebootServer = () => {
       axios.put(`http://localhost:4454/servers/${id}/reboot`)
          .then(response => {
-            onServerChange(prevState => ({
-               ...prevState,
-               status: response.data.status,
-            }))
+            changeStatus(response.data.status)
             listServerStatus.onStatusChange(response.data.status)
          });
    }

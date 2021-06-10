@@ -1,7 +1,9 @@
 import React, { useState, createContext } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import { MdMoreHoriz as More, MdClose as Failed, MdBrightness1 as Live } from 'react-icons/md'
+import { MdMoreHoriz as More } from 'react-icons/md'
+import { CgClose as Offline } from 'react-icons/cg'
+import { VscCircleFilled as Online } from 'react-icons/vsc'
 import DropDown from './DropDown';
 import { useInterval } from './UseInterval';
 
@@ -39,7 +41,6 @@ const Name = styled.div`
       margin:0;
    }
 `;
-
 const Status = styled.div`
    display: flex;
    align-items: center;
@@ -49,10 +50,23 @@ const Status = styled.div`
    line-height: 59px;
    padding-left: 0.5rem;
    svg{
-      width: 1em;
-      height: 1em;
-      margin-right: 0.5rem;
+      width: 1.5em;
+      height: 1.5em;
+      margin-right: 0.25rem;
    }
+   p{
+      color: ${({ status }) => {
+      if (status === "ONLINE") {
+         return '#33CAD4'
+      } if (status === "REBOOTING") {
+         return '#9CA7D3'
+      }
+   }}
+   }
+   ${({ status }) => status === "REBOOTING" && `
+   p:after{
+      content: '...';
+   }`}
 `;
 const StyledMore = styled(More)`
    border-radius: 50px;
@@ -65,9 +79,9 @@ const StyledMore = styled(More)`
 `
 const renderIcon = (status) => {
    if (status === "OFFLINE") {
-      return <Failed style={{ color: "#EA5885" }} />
+      return <Offline style={{ color: "#EA5885" }} />
    } if (status === "ONLINE") {
-      return <Live style={{ color: "#33CAD4" }} />
+      return <Online style={{ color: "#33CAD4" }} />
    }
    return null
 }
@@ -111,14 +125,20 @@ export const List = ({ servers, onStatusChange, itemId, onItemIdChange, onSearch
                   <Name>
                      <h5>{server.name}</h5>
                   </Name>
-                  <Status>
+                  <Status status={server.status}>
                      {renderIcon(server.status)}
                      <p>{server.status}</p>
                   </Status>
                </InfoWrapper>
                <StyledMore onClick={() => renderDropDown(server.id)} />
-               <StatusContext.Provider value={{ onStatusChange }}>
-                  {open && itemId === server.id && <DropDown open={open} openChange={setOpen} id={server.id} />}
+               <StatusContext.Provider value={{ onStatusChange, servers }}>
+                  {open && itemId === server.id && <DropDown
+                     server={server}
+                     onServerChange={onSearchResultsChange}
+                     open={open}
+                     openChange={setOpen}
+                     id={server.id}
+                  />}
                </StatusContext.Provider>
 
             </ListItem>
