@@ -6,9 +6,10 @@ import Button from './Button';
 
 const StyledDropDown = styled.div`
    position: absolute;
-   transform: translateX(calc(50vw - 2rem)) translateY(2vh);
+   right: 0;
+   top: -0.25rem;
+   z-index: 99;
    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-
 `
 const DropDown = ({ open, openChange, id }) => {
    const [server, setServer] = useState(null);
@@ -21,14 +22,22 @@ const DropDown = ({ open, openChange, id }) => {
       getresponse();
    }, [id]);
 
-   const handleeClick = e => {
+   const handleClick = e => {
       if (node.current.contains(e.target)) {
          return;
       }
+      openChange(false);
    }
 
+   useEffect(() => {
+      document.addEventListener('mousedown', handleClick);
+      return () => {
+         document.removeEventListener('mousedown', handleClick);
+      };
+   }, [])
+
    return (
-      <StyledDropDown onClick={e => openChange(!open)} >
+      <StyledDropDown ref={node} onClick={e => openChange(!open)} >
          {server && <Button
             status={server.status}
             id={id}

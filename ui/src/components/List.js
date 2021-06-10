@@ -12,6 +12,7 @@ const StyledList = styled.ul`
    padding:0;
 `
 const ListItem = styled.li`
+   position: relative;
    display: flex;
    align-items: center;
    border-bottom: 2px solid #EDEDF0;
