@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import styled from 'styled-components';
 import axios from 'axios';
 
@@ -10,8 +10,9 @@ const StyledDropDown = styled.div`
    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
 `
-const DropDown = ({ id }) => {
+const DropDown = ({ open, openChange, id }) => {
    const [server, setServer] = useState(null);
+   const node = useRef();
    useEffect(() => {
       const getresponse = async () => {
          const response = await axios.get(`http://localhost:4454/servers/${id}`)
@@ -20,8 +21,14 @@ const DropDown = ({ id }) => {
       getresponse();
    }, [id]);
 
+   const handleeClick = e => {
+      if (node.current.contains(e.target)) {
+         return;
+      }
+   }
+
    return (
-      <StyledDropDown >
+      <StyledDropDown onClick={e => openChange(!open)} >
          {server && <Button
             status={server.status}
             id={id}

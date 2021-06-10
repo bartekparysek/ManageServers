@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect } from 'react';
+import React, { useState, createContext } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { MdMoreHoriz as More, MdClose as Failed, MdBrightness1 as Live } from 'react-icons/md'
@@ -117,7 +117,7 @@ export const List = ({ servers, onStatusChange, itemId, onItemIdChange, onSearch
                </InfoWrapper>
                <StyledMore onClick={() => renderDropDown(server.id)} />
                <StatusContext.Provider value={{ onStatusChange }}>
-                  {open && itemId === server.id && <DropDown id={server.id} />}
+                  {open && itemId === server.id && <DropDown open={open} openChange={setOpen} id={server.id} />}
                </StatusContext.Provider>
 
             </ListItem>
