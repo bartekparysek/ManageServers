@@ -13,9 +13,12 @@ const StyledInput = styled.input`
 
    &::placeholder{
       color:#A9AEC1;
-      line-height: 44px;
    }
-
+   &:focus {
+      outline:none;
+     border:2px solid #4D90FE;
+     border-radius: 5rem;
+   }
 `
 const Search = styled(FiSearch)`
    color:#A9AEC1;
