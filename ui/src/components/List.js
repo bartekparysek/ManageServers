@@ -130,7 +130,7 @@ export const List = ({ servers, onStatusChange, itemId, onItemIdChange, onSearch
                      <p>{server.status}</p>
                   </Status>
                </InfoWrapper>
-               <StyledMore onClick={() => renderDropDown(server.id)} />
+               <StyledMore aria-label={server.name} onClick={() => renderDropDown(server.id)} />
                <StatusContext.Provider value={{ onStatusChange, servers }}>
                   {open && itemId === server.id && <DropDown
                      server={server}
