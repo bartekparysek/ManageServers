@@ -9,8 +9,6 @@ export const handlers = [
                name: 'US East (Virginia)',
                status: 'ONLINE'
             },
-
-
          ])
       )
 
