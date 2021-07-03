@@ -61,8 +61,8 @@ const ServersList = () => {
          setSearchResults(resultsCopy)
 
       }
-
-   }, [status]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [status, itemId]);
 
 
    return (

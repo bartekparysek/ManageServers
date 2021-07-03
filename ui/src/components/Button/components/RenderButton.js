@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
@@ -18,32 +18,21 @@ const StyledButton = styled.button`
 `;
 
 const RenderButton = ({ status, listServerStatus, setNewStatus }) => {
-   const [clickStatus, setClickstatus] = useState('');
-
-   const handleChange = (e, clickedStatus) => {
-      e.stopPropagation();
-      setClickstatus(clickedStatus);
+   const handleChange = (clickedStatus) => {
+      setNewStatus(clickedStatus);
    }
-
-
-   useEffect(() => {
-      if (clickStatus !== '') {
-         setNewStatus(clickStatus);
-      }
-
-   }, [clickStatus, setNewStatus])
 
    if (status === 'ONLINE') {
       return (
          <>
             <StyledButton
                onMouseLeave={() => listServerStatus.onStatusChange(null)}
-               onClick={(e) => handleChange(e, 'off')}>
+               onClick={() => handleChange('off')}>
                Turn off
             </StyledButton>
             <StyledButton
                onMouseLeave={() => listServerStatus.onStatusChange(null)}
-               onClick={(e) => handleChange(e, 'reboot')}>
+               onClick={() => handleChange('reboot')}>
                Reboot
             </StyledButton>
          </>
@@ -53,7 +42,7 @@ const RenderButton = ({ status, listServerStatus, setNewStatus }) => {
          <>
             <StyledButton
                onMouseLeave={() => listServerStatus.onStatusChange(null)}
-               onClick={(e) => handleChange(e, 'on')}>
+               onClick={() => handleChange('on')}>
                Turn on
             </StyledButton>
          </>

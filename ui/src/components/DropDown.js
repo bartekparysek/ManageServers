@@ -28,7 +28,7 @@ const DropDown = ({ server, onServerChange, open, openChange, id }) => {
    }, [handleClick])
 
    return (
-      <StyledDropDown ref={node} onClick={e => openChange(!open)} >
+      <StyledDropDown ref={node} onClick={() => setTimeout(() => openChange(!open), 5)} >
          {server && <Button
             status={server.status}
             id={id}
