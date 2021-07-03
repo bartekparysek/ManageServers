@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useCallback } from 'react'
 import styled from 'styled-components';
 
-import Button from './Button';
+import Button from '../components/Button/container/Button';
 
 const StyledDropDown = styled.div`
    position: absolute;
