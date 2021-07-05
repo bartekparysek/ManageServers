@@ -54,14 +54,16 @@ const ServersList = () => {
 
    useEffect(() => {
       if (status) {
-         let resultsCopy = [...searchResults];
-         let server = { ...resultsCopy[itemId - 1] };
-         server.status = status;
-         resultsCopy[itemId - 1] = server;
-         setSearchResults(resultsCopy)
+         setSearchResults(prev => {
+            return prev.map(server => {
+               if (server.id === itemId) {
+                  return { ...server, status: status }
+               }
+               return server
+            })
+         })
 
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [status, itemId]);
 
 
@@ -71,9 +73,10 @@ const ServersList = () => {
             <ServerNumber servers={servers} />
             <SearchBar
                servers={servers}
-               onSearchResultsChange={setSearchResults}
+               setSearchResultsChange={setSearchResults}
                searchTerm={searchTerm}
-               onSearchTermChange={setSearchTerm}
+               setSearchTermChange={setSearchTerm}
+               setServers={setServers}
             />
          </IntroWrapper>
          <ListWrapper>
@@ -83,10 +86,10 @@ const ServersList = () => {
             </ListHead>
             <List
                servers={searchResults}
-               onStatusChange={setStatus}
+               setStatus={setStatus}
                itemId={itemId}
-               onItemIdChange={setItemId}
-               onSearchResultsChange={setSearchResults}
+               setItemId={setItemId}
+               setSearchResults={setSearchResults}
             />
          </ListWrapper>
       </>

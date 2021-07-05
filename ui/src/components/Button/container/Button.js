@@ -9,9 +9,8 @@ display: flex;
 flex-direction:column;
 `
 
-const Button = ({ status, id, onServerChange }) => {
+const Button = ({ status, id, setSearchResults }) => {
    const listServerStatus = useContext(StatusContext);
-   let servers = listServerStatus.servers;
    const [newStatus, setNewStatus] = useState('');
 
    useEffect(() => {
@@ -19,18 +18,21 @@ const Button = ({ status, id, onServerChange }) => {
          if (newStatus === 'off' || newStatus === 'on' || newStatus === 'reboot') {
             axios.put(`http://localhost:4454/servers/${id}/${newStatus}`)
                .then(response => {
-                  let resultsCopy = [...servers];
-                  let server = { ...resultsCopy[id - 1] };
-                  server.status = response.data.status;
-                  resultsCopy[id - 1] = server;
-                  onServerChange(resultsCopy);
-                  listServerStatus.onStatusChange(response.data.status)
+                  setSearchResults(prev => {
+                     return prev.map(server => {
+                        if (server.id === id) {
+                           return { ...server, status: response.data.status }
+                        }
+                        return server
+                     })
+                  })
+
                });
          }
       }
       updateServer();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, [id, newStatus])
+
+   }, [id, newStatus, setSearchResults])
 
    return (
       <StyledWrapper>

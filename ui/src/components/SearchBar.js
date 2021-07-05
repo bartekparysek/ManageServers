@@ -29,20 +29,22 @@ const Search = styled(FiSearch)`
    font-weight: bold;
 `;
 
-const SearchBar = ({ servers, onSearchResultsChange, searchTerm, onSearchTermChange }) => {
+const SearchBar = ({ servers, setSearchResultsChange, searchTerm, setSearchTermChange, setServers }) => {
 
    const handleChange = event => {
-      onSearchTermChange(event.target.value);
+      setSearchTermChange(event.target.value);
    };
    useEffect(() => {
       if (servers) {
-         const results = servers.filter(server => {
-            return server.name.toLowerCase().includes(searchTerm.toLowerCase());
-         });
-         onSearchResultsChange(results);
+         const results = servers
+            .filter(server => {
+               return server.name.toLowerCase().includes(searchTerm.toLowerCase());
+            });
+
+         setSearchResultsChange(results);
       }
 
-   }, [servers, onSearchResultsChange, searchTerm]);
+   }, [servers, searchTerm, setServers, setSearchResultsChange]);
 
    return (
       <div>

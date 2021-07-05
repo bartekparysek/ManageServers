@@ -87,11 +87,11 @@ const renderIcon = (status) => {
 }
 
 
-export const List = ({ servers, onStatusChange, itemId, onItemIdChange, onSearchResultsChange }) => {
+export const List = ({ servers, setStatus, itemId, setItemId, setSearchResults }) => {
    const [open, setOpen] = useState(false);
 
    const renderDropDown = (id) => {
-      onItemIdChange(id);
+      setItemId(id);
       setOpen(!open);
    }
 
@@ -103,15 +103,17 @@ export const List = ({ servers, onStatusChange, itemId, onItemIdChange, onSearch
                const response = await axios.get(`http://localhost:4454/servers/${item.id}`);
 
                if (response.data.status === "ONLINE") {
-                  let resultsCopy = [...servers];
-                  let server = { ...resultsCopy[item.id - 1] };
-                  server.status = response.data.status;
-                  resultsCopy[item.id - 1] = server;
-                  onSearchResultsChange(resultsCopy);
+                  setSearchResults(prev => {
+                     return prev.map(server => {
+                        if (server.id === itemId) {
+                           return { ...server, status: response.data.status }
+                        }
+                        return server
+                     })
+                  })
                }
             }
             getresponse();
-
          });
       }
    }, 1000);
@@ -131,10 +133,10 @@ export const List = ({ servers, onStatusChange, itemId, onItemIdChange, onSearch
                   </Status>
                </InfoWrapper>
                <StyledMore aria-label={server.name} onClick={() => renderDropDown(server.id)} />
-               <StatusContext.Provider value={{ onStatusChange, servers }}>
+               <StatusContext.Provider value={{ setStatus, servers }}>
                   {open && itemId === server.id && <DropDown
                      server={server}
-                     onServerChange={onSearchResultsChange}
+                     setSearchResults={setSearchResults}
                      open={open}
                      openChange={setOpen}
                      id={server.id}

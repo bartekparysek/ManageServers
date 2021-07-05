@@ -26,12 +26,12 @@ const RenderButton = ({ status, listServerStatus, setNewStatus }) => {
       return (
          <>
             <StyledButton
-               onMouseLeave={() => listServerStatus.onStatusChange(null)}
+               onMouseLeave={() => listServerStatus.setStatus(null)}
                onClick={() => handleChange('off')}>
                Turn off
             </StyledButton>
             <StyledButton
-               onMouseLeave={() => listServerStatus.onStatusChange(null)}
+               onMouseLeave={() => listServerStatus.setStatus(null)}
                onClick={() => handleChange('reboot')}>
                Reboot
             </StyledButton>
@@ -41,7 +41,7 @@ const RenderButton = ({ status, listServerStatus, setNewStatus }) => {
       return (
          <>
             <StyledButton
-               onMouseLeave={() => listServerStatus.onStatusChange(null)}
+               onMouseLeave={() => listServerStatus.setStatus(null)}
                onClick={() => handleChange('on')}>
                Turn on
             </StyledButton>

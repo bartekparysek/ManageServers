@@ -10,7 +10,7 @@ const StyledDropDown = styled.div`
    z-index: 99;
    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 `
-const DropDown = ({ server, onServerChange, open, openChange, id }) => {
+const DropDown = ({ server, setSearchResults, open, openChange, id }) => {
    const node = useRef();
 
    const handleClick = useCallback((e) => {
@@ -32,7 +32,7 @@ const DropDown = ({ server, onServerChange, open, openChange, id }) => {
          {server && <Button
             status={server.status}
             id={id}
-            onServerChange={onServerChange}
+            setSearchResults={setSearchResults}
          />}
       </StyledDropDown>
    )
