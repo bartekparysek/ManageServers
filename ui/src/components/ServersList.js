@@ -44,6 +44,7 @@ const ServersList = () => {
    const [searchTerm, setSearchTerm] = useState('');
    const [status, setStatus] = useState(null);
    const [itemId, setItemId] = useState(null);
+
    useEffect(() => {
       const getresponse = async () => {
          const response = await axios.get('http://localhost:4454/servers');

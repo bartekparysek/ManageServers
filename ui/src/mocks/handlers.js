@@ -9,6 +9,16 @@ export const handlers = [
                name: 'US East (Virginia)',
                status: 'ONLINE'
             },
+            {
+               id: 2,
+               name: 'US East (Ohio)',
+               status: 'ONLINE'
+            },
+            {
+               id: 3,
+               name: 'US West (N. California)',
+               status: 'OFFLINE'
+            },
          ])
       )
    }),
@@ -33,5 +43,27 @@ export const handlers = [
             }
          )
       )
-   })
+   }),
+   rest.put('http://localhost:4454/servers/1/off', (req, res, ctx) => {
+      return res(
+         ctx.json(
+            {
+               id: 1,
+               name: 'US East (Virginia)',
+               status: 'OFFLINE',
+            }
+         )
+      )
+   }),
+   rest.put('http://localhost:4454/servers/1/on', (req, res, ctx) => {
+      return res(
+         ctx.json(
+            {
+               id: 1,
+               name: 'US East (Virginia)',
+               status: 'ONLINE',
+            }
+         )
+      )
+   }),
 ]
