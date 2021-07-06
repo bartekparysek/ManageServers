@@ -1,44 +1,41 @@
-# Task
+# ManageServers ⚙️
 
-In Acaisoft we love working with cloud technologies. In this task you will have to create simple UI components that will allow a user to remotely manage many servers located all around the world.
+A administration panel to control status of multiple servers at the same time. It gives abbility to turn on/off and reboot servers based on API calls.
 
-## UI
+## Table of Contents
 
-Marcin, a hardworking DevOps, would like to see the statuses of all the servers Acaisoft currently maintains. He would like to manually turn them on or off and sometimes reboot if neccessary.
+-  [General Info](#general-information)
+-  [Technologies](#technologies)
+-  [Features](#features)
+-  [Screenshots](#screenshots)
+-  [Setup](#setup)
+-  [Usage](#usage)
+-  [Project Status](#project-status)
+-  [Acknowledgements](#acknowledgements)
 
-Your task is to provide such a functionality. Fortunately, our fantastic
-designer Marta made a prototype for us. Here is how it looks:
+## Technologies Used
+
+-  React - version 16.9.0
+-  Styled Components - version 5.3.0
+-  Testing Library - version 7.31.2
+-  Axios - version 0.21.1
+-  MSW - verision 0.29.0
+
+## Features
+
+-  List all the servers
+-  Turn on server
+-  Turn off server
+-  Reboot server
+-  Search for servers
+
+## Screenshots
 
 ![img](./images/server-ui.png)
 
-Marta also made the [Invision](https://www.invisionapp.com/) project for us, so we can freely check out the styles.
-The credentials are:
-```
-Email: acaisoft@tryzoe.com
-Password: acaisoft248
-```
+## Setup
 
-### Tasks
- 1. List all the servers.
- 2. Provide 1:1 UI from the invision project (Pay attention to this)
- 2. Add a clickable dropdown on the right with 2 options :
-    1. Turn on (or Turn off) - depending on the status (You can't display Turn on with Turn Off dropdown option at the same time)
-    2. Reboot (When server is rebooting please pay attention to how the dropdown looks like)
- 3. When the server is in a `REBOOTING` status you should be pinging single server API endpoint `/servers/:serverId `  (e.g. every 1s) until the status changes.
- 4. Allow the user to locally search for a server ( Pay attention to how your application behaves when you put something in search input)
- 5. Add unit tests at least for rebooting functionality and if you want and you have time please add more tests.
-
-### Tips
- - We really like small components.
- - Pay attention to code quality, conventions, formatting, etc.
- - You can use any libraries, but when you’re using something like ngrx or any other more advanced library please give us a quick note why do you use it.
- - Don't leave unneccesary code!!!
-
-### Requirements
-
-UI was created using Node.js v10.6.0. Other versions may or may not work correctly.
-
-### Installation
+### UI
 
 In `./ui` run:
 
@@ -46,41 +43,13 @@ In `./ui` run:
 npm install
 ```
 
-### Run
-
 In `./ui` run:
 
 ```shell
 npm start
 ```
 
-## API
-
-To remotely administer the servers we have a REST API located in `./src` directory.
-The API provides an interface listed in the table below:
-
-| Method | Endpoint | Response | Description |
-|---|---|---|---|
-| GET | /servers | Array\<[Server](#types)\> | Returns a list of all servers. |
-| GET | /servers/:serverId | [Server](#types) | Returns a server. |
-| PUT | /servers/:serverId/on | [Server](#types) | Turns on a server |
-| PUT | /servers/:serverId/off | [Server](#types) | Turns off a server |
-| PUT | /servers/:serverId/reboot | [Server](#types) | Reboots a server |
-
-#### Types
-```typescript
-interface Server {
-    id: number;
-    name: string;
-    status: 'ONLINE' | 'OFFLINE' | 'REBOOTING';
-}
-```
-
-### Requirements
-
-Our API was created using Node.js v10.6.0. Other versions may or may not work correctly.
-
-### Installation
+### API
 
 In `./api` run:
 
@@ -88,10 +57,16 @@ In `./api` run:
 npm install
 ```
 
-### Run
-
 In `./api` run:
 
 ```shell
 npm start
 ```
+
+## Project Status
+
+Project is: _complete_
+
+## Acknowledgements
+
+This project was based on recruitment task for AcaiSoft
